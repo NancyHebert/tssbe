@@ -9,7 +9,7 @@ python-etcd
 falcon-cors==1.0.1
 redis==2.10.5
 falcon-multipart==0.1.0
-requests==2.10.0
+requests==2.20.0
 httpie
 sqlalchemy_utils
 Sendinblue==2.0.5.1
