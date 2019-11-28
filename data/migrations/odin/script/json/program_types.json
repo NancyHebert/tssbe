@@ -1,0 +1,16 @@
+[
+	{
+		"is_active": 1,
+		 "program_type_names": [
+      {
+        "name": "first program type.",
+        "lang": "FR"
+      },
+      {
+        "name": "first program type",
+        "lang": "EN"
+      }
+  ]
+
+
+}]

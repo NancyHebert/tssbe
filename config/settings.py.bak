@@ -1,0 +1,119 @@
+"""
+This module provides configuration to all of the other modules in this application.
+
+In it's current state, it uses the envs variable, but the goal is to retrieve configuration
+information from etcd.
+
+"""
+import etcd
+from etcd.client import Client
+import json
+import os
+from cerberus import Validator, errors
+from data.resources.schemas.configuration import schema_config
+from collections import defaultdict
+
+
+class Configuration:
+
+    def __init__(self):
+        # get an environment variable for the etcd config format : JSON string
+        # ex.:  '{"host": "10.0.2.15","port": 2379}'
+        try:
+            self.etcd_config = json.loads(os.environ['ETCD_ENV'])
+        except KeyError:
+            raise ErrorMessage('ETCDEnvNotFound', 'The environment variable for etcd is not defined: <ETCD_ENV>')
+
+        # Odin Environment configuration
+        try:
+            self.env = os.environ['ODIN_ENV']
+        except KeyError:
+            raise ErrorMessage('EnvNotFound', 'The environment variable is not defined: <ODIN_ENV>')
+
+    def makedict(self):
+        return defaultdict(self.makedict)
+
+    def dictify(self, d):
+        for k,v in d.items():
+            if isinstance(v,defaultdict):
+                d[k] = self.dictify(v)
+        return dict(d)
+
+    def get_config(self):
+        import sys
+        try:
+            # client = Client(host=self.etcd_config['host'], port=self.etcd_config['port'])
+            # # fetch settings from ETCD
+            # config_json = client.read('/fom_config/' + self.env).value
+            # # convert json configuration to python dictionary. On fail, raise invalid json
+            # config_dict = json.loads(config_json)
+            # print(config_dict)
+
+
+            client = Client(host=self.etcd_config['host'], port=self.etcd_config['port'])
+            config_json = client.read('/' + self.env, recursive=True, sorted=True)
+
+            d=defaultdict(self.makedict)
+            for c in config_json.children:
+                n = c.key.split('/')
+                d[n[2]][n[3]] = c.value
+
+            config_dict = self.dictify(d)
+
+
+            # validate configuration data
+            v = Validator(schema_config)
+            if not v.validate(config_dict): # be sure to update the schema in data/resources/schemas if its changed
+                raise ErrorMessage('BadConfiguration', 'The configuration data is not valid: <{}>'.format(v.errors))
+
+            return config_dict
+        except etcd.EtcdKeyNotFound:
+            raise ErrorMessage('BadEnvironment', 'The configuration is not found: <{}>'.format(self.env))
+        except etcd.EtcdConnectionFailed:
+            raise ErrorMessage('EtcdConnectionFailed', 'Unable to connect to the Etcd server')
+        except ValueError:
+            raise ErrorMessage('InvalidJSON', 'The configuration file seems to contain an error: <{}>'.format(config_json))
+        except Exception:
+            raise
+
+
+# Custom errors
+
+class Error(Exception):
+    pass
+
+
+class BadEnvironment(Error):
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
+
+
+class ErrorMessage(Error):
+    def __init__(self, expression, message):
+        self.expression = expression
+        self.message = message
+
+def get_env():
+    return config_dict
+
+
+def get_db_url():
+    db_env = get_env()['db']
+    return '{0}+{1}://{2}:{3}@{4}/{5}' \
+        .format(db_env['flavor'],
+                db_env['driver'],
+                db_env['user'],
+                db_env['pwd'],
+                db_env['host'],
+                db_env['db_name'])
+
+
+def get_cache_options():
+    cache_env = get_env()['cache']
+    return cache_env
+
+
+cfg = Configuration()
+config_dict = cfg.get_config()
+print(get_db_url())

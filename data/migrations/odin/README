@@ -1,0 +1,18 @@
+Generic single-database configuration.
+
+
+http localhost:4002/heartbeat
+http http://localhost:4002/message/1/setread
+
+http http://localhost:4002/students
+http http://localhost:4002/student/1
+
+http http://localhost:4002/students/view/
+http http://localhost:4002/researchers
+http PUT http://localhost:4002/researcher/745
+
+http http://localhost:4002/programs
+
+http http://localhost:4002/verifications/donaldfarmer@gmail.com
+
+http PUT http://localhost:4002/researcher/745 

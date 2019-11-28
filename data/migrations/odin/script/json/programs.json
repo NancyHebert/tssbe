@@ -1,0 +1,15 @@
+[
+  {
+    "program_types_id": 1,
+    "is_active": 1,
+    "program_names": [
+      {
+        "name": "PH.D.",
+        "lang": "FR"
+      },
+      {
+        "name": "PH.D.",
+        "lang": "EN"
+      }
+    ]
+  },

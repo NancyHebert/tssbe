@@ -1,0 +1,41 @@
+[
+  {
+    "is_active": 1,
+    "organization_type_names": [
+      {
+        "lang": "FR",
+        "name": "Université"
+      },
+      {
+        "lang": "EN",
+        "name": "University"
+      }
+    ]
+  },
+  {
+    "is_active": 1,
+    "organization_type_names": [
+      {
+        "lang": "FR",
+        "name": "Département"
+      },
+      {
+        "lang": "EN",
+        "name": "Department"
+      }
+    ]
+  },
+  {
+    "is_active": 1,
+    "organization_type_names": [
+      {
+        "lang": "FR",
+        "name": "Faculté"
+      },
+      {
+        "lang": "EN",
+        "name": "Faculty"
+      }
+    ]
+  }
+]

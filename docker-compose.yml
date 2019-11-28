@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  backend:
+    build: .
+    image: medtech/tss_backend:latest
+    restart: always
+    depends_on:
+     - db
+    expose:
+     - "5101"
+    environment:
+     - PYTHONUNBUFFERED=0
+    volumes:
+     - "/var/dockerpersist/tss_be/uploads:/usr/src/tmp_fu"
+    networks:
+     - int
+     - nginx_outside
+  db:
+    image: postgres
+    restart: always
+    environment:
+     - POSTGRES_PASSWORD=y0uguysr0ck
+     - POSTGRES_USER=odin
+    expose:
+     - "5432"
+    volumes:
+     - "/var/dockerpersist/tss_be/postgres:/var/lib/postgresql/data"
+    networks:
+     - int
+
+networks:
+  int:
+    driver: bridge
+  nginx_outside:
+    external: true

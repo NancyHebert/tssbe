@@ -1,0 +1,18 @@
+[
+  {
+    "parent_id": 1,
+    "is_active": 1,
+    "person_type_names": [
+      {
+        "name": "conseiller",
+        "lang": "FR",
+        "full_path": ""
+      },
+      {
+        "name": "advisor",
+        "lang": "EN",
+        "full_path": ""
+      }
+    ]
+  }
+]

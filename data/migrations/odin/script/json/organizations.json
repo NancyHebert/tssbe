@@ -1,0 +1,53 @@
+[
+  {
+    "parent_id": 1,
+    "organization_types_id": 1,
+    "is_active": 1,
+    "organization_names": [
+      {
+        "name": "Université d’Ottawa",
+        "lang": "FR",
+        "full_path": ""
+      },
+      {
+        "name": "University of Ottawa",
+        "lang": "EN",
+        "full_path": ""
+      }
+    ]
+  },
+  {
+    "parent_id": 2,
+    "organization_types_id": 3,
+    "is_active": 1,
+    "organization_names": [
+      {
+        "name": "Faculté de Medecine",
+        "lang": "FR",
+        "full_path": ""
+      },
+      {
+        "name": "Faculty of Medicine",
+        "lang": "EN",
+        "full_path": ""
+      }
+    ]
+  },
+  {
+    "parent_id": 3,
+    "organization_types_id": 2,
+    "is_active": 1,
+    "organization_names": [
+      {
+        "name": "Études supérieures",
+        "lang": "FR",
+        "full_path": ""
+      },
+      {
+        "name": "Gradstudies",
+        "lang": "EN",
+        "full_path": ""
+      }
+    ]
+  }
+]

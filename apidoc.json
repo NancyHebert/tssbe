@@ -1,0 +1,7 @@
+{
+  "name": "TSS Api",
+  "version": "0.1.0",
+  "description": "A description about TSS Api",
+  "title": "Odin TSS",
+  "url" : "https://api.github.com/v1"
+}

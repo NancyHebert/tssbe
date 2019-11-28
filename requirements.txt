@@ -1,0 +1,17 @@
+falcon==1.0.0
+gunicorn==19.4.5
+sqlalchemy==1.0.12
+behave==1.2.5
+alembic==0.8.4
+cerberus==0.9.2
+Psycopg2cffi==2.7.2
+python-etcd
+falcon-cors==1.0.1
+redis==2.10.5
+falcon-multipart==0.1.0
+requests==2.10.0
+httpie
+sqlalchemy_utils
+Sendinblue==2.0.5.1
+pyexcel
+pyexcel-xlsxw

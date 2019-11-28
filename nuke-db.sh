@@ -1,0 +1,1 @@
+sudo rm -rf /var/dockerpersist/tss_be/postgres/
