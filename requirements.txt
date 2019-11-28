@@ -1,5 +1,5 @@
 falcon==1.0.0
-gunicorn==19.4.5
+gunicorn==19.5.0
 sqlalchemy==1.0.12
 behave==1.2.5
 alembic==0.8.4
